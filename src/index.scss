@@ -1,0 +1,48 @@
+// Update the import directory to point to it‘s location within node_modules
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+
+// Customization
+$body-bg: #D6D5C9; // Example: light gray
+$body-color: #0A100D;
+$primary: #D6D5C9;
+$light: #B9BAA3;
+$dark: #902923;
+$bg-dark: #D6D5C9;
+$headings-color: #A22C29;
+$secondary: #A22C29;
+
+.jumbotron {
+    padding: 1rem;
+    margin: 0px;
+    background-color: #e9ecef;
+}
+
+.thumbnail {
+    object-fit: cover;
+    height: 30vh !important;
+    width: 100% !important;
+    min-height: 30vh;
+    min-width: 30vh;
+    border-radius: 3% 3% 0 0;
+}
+
+.title {
+    font-family: "Silkscreen", sans-serif;
+    text-shadow: 4px 4px 4px #aaa;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    font-size: 6rem;
+}
+
+.navbar-dark .navbar-brand {
+    color: #D6D5C9;
+}
+
+h1 {
+    color: #A22C29;
+}
+
+@import "bootstrap"; // Import the rest of Bootstrap
+
+// Import the Sass files as usual
+@import "bootstrap-icons/font/bootstrap-icons";
