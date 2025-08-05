@@ -8,11 +8,13 @@ $primary: #D6D5C9;
 $light: #B9BAA3;
 $dark: #902923;
 $bg-dark: #D6D5C9;
-$headings-color: #A22C29;
+$headings-color: #0A100D;
 $secondary: #A22C29;
+$enable-responsive-font-sizes: true;
+$headings-font-family: "Silkscreen";
 
 .jumbotron {
-    padding: 1rem;
+    padding: 3rem;
     margin: 0px;
     background-color: #e9ecef;
 }
@@ -26,12 +28,18 @@ $secondary: #A22C29;
     border-radius: 3% 3% 0 0;
 }
 
+.icon {
+    height: 20%;
+    width: 20%;
+}
+
 .title {
     font-family: "Silkscreen", sans-serif;
     text-shadow: 4px 4px 4px #aaa;
     font-weight: 500;
     margin-top: 0.5rem;
-    font-size: 6rem;
+    font-size: 4rem;
+    line-height: 4rem;
 }
 
 .navbar-dark .navbar-brand {
