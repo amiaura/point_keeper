@@ -15,6 +15,13 @@ interface Round {
   scores: { [playerId: string]: number };
 }
 
+interface RummyState {
+  players?: Player[];
+  rounds?: Round[];
+  winningPoints?: number;
+  showSetup?: boolean;
+}
+
 export default function RummyPage() {
   const { gameState, updateGameState } = useGameState();
   const rummyKey = 'rummy';
@@ -42,7 +49,7 @@ export default function RummyPage() {
 
   // Load saved state
   useEffect(() => {
-    const savedData = gameState[rummyKey];
+    const savedData = gameState[rummyKey] as RummyState | undefined;
     if (savedData) {
       setPlayers(savedData.players || []);
       setRounds(savedData.rounds || []);
