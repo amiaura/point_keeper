@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "node ./scripts/export-gh-pages.js",
     "start": "next start",
     "lint": "next lint"
   },

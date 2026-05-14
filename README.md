@@ -23,6 +23,12 @@ A Next.js app for tracking points in card games. This project provides a landing
 ## Persistence strategy
 The app uses client-side `localStorage` to keep score state in the browser, allowing refresh-safe progress without a backend database.
 
+## Static export and GitHub Pages
+This project uses Next.js `output: 'export'` so the build can be exported as a static site.
+- Run `npm run build` to generate the optimized production build.
+- Run `npm run export` to generate a static `out/` folder.
+- Publish the contents of `out/` to GitHub Pages.
+
 ## Future work
 - Implement the actual point-counting UI for each game
 - Add player management and score summaries
