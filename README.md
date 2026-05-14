@@ -1,12 +1,29 @@
-# React + Vite
+# Point Keeper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Next.js app for tracking points in card games. This project provides a landing page, navigation, and placeholder pages for the six games: cabbage, rummy, golf, gin, hearts, and spades.
 
-Currently, two official plugins are available:
+## What is included
+- Next.js App Router structure
+- global layout and site shell
+- navigation menu for each game route
+- landing page with game summaries
+- placeholder pages for each game
+- browser persistence utility using `localStorage`
+- context and hook scaffolding for future per-game score state
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Routes
+- `/` — landing page
+- `/cabbage`
+- `/rummy`
+- `/golf`
+- `/gin`
+- `/hearts`
+- `/spades`
 
-## Expanding the ESLint configuration
+## Persistence strategy
+The app uses client-side `localStorage` to keep score state in the browser, allowing refresh-safe progress without a backend database.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Future work
+- Implement the actual point-counting UI for each game
+- Add player management and score summaries
+- Add game-specific scoring logic for cabbage, rummy, golf, gin, hearts, and spades
