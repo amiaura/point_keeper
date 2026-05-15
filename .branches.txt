@@ -1,7 +1,0 @@
-+ add-rummy-edit-scores
-* gh-pages
-  master
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/add-rummy-edit-scores
-  remotes/origin/gh-pages
-  remotes/origin/master
