@@ -1,10 +1,12 @@
 const { spawnSync } = require('child_process');
-const { existsSync, mkdirSync, readdirSync, rmSync, copyFileSync, statSync } = require('fs');
+const { existsSync, mkdirSync, readdirSync, rmSync, copyFileSync, writeFileSync } = require('fs');
 const { resolve, join } = require('path');
 
 const root = resolve(process.cwd());
 const worktree = resolve(root, '..', 'point_keeper-gh-pages');
 const outDir = resolve(root, 'out');
+const nextBin = resolve(root, 'node_modules', 'next', 'dist', 'bin', 'next');
+const exportScript = resolve(root, 'scripts', 'export-gh-pages.js');
 
 function run(cmd, args, opts = {}) {
   const result = spawnSync(cmd, args, { stdio: 'inherit', ...opts });
@@ -33,20 +35,29 @@ function clearWorktree(dir) {
   }
 }
 
-function git(args, opts = {}) {
-  return run('git', args, { cwd: root, ...opts });
-}
-
 function gitWorktree(args) {
   return run('git', args, { cwd: root });
 }
 
+function tryCreateWorktree() {
+  try {
+    gitWorktree(['worktree', 'add', '-B', 'gh-pages', worktree, 'origin/gh-pages']);
+  } catch (error) {
+    console.log('origin/gh-pages not available, creating local gh-pages branch instead...');
+    gitWorktree(['worktree', 'add', '-B', 'gh-pages', worktree]);
+  }
+}
+
 (function main() {
+  if (!existsSync(nextBin)) {
+    throw new Error('Next binary not found. Run npm install before publishing.');
+  }
+
   console.log('Building the app...');
-  run('npm', ['run', 'build'], { cwd: root });
+  run('node', [nextBin, 'build'], { cwd: root });
 
   console.log('Exporting static pages...');
-  run('npm', ['run', 'export'], { cwd: root });
+  run('node', [exportScript], { cwd: root });
 
   if (!existsSync(outDir)) {
     throw new Error('Export directory not found: out/');
@@ -58,7 +69,7 @@ function gitWorktree(args) {
   }
 
   console.log('Creating gh-pages worktree...');
-  gitWorktree(['worktree', 'add', '-B', 'gh-pages', worktree, 'origin/gh-pages']);
+  tryCreateWorktree();
 
   console.log('Clearing old files from gh-pages worktree...');
   clearWorktree(worktree);
@@ -67,8 +78,7 @@ function gitWorktree(args) {
   copyDirectory(outDir, worktree);
 
   console.log('Installing .nojekyll...');
-  const nojekyllPath = join(worktree, '.nojekyll');
-  require('fs').writeFileSync(nojekyllPath, '');
+  writeFileSync(join(worktree, '.nojekyll'), '');
 
   console.log('Committing and pushing gh-pages...');
   run('git', ['add', '-A'], { cwd: worktree });

@@ -19,6 +19,12 @@ From the repository root:
 npm run publish:gh-pages
 ```
 
+If `npm` is blocked by PowerShell execution policy, run the deploy script directly:
+
+```powershell
+node .\scripts\publish-gh-pages.js
+```
+
 If you want to run the steps manually:
 
 ```bash
@@ -31,8 +37,9 @@ node ./scripts/publish-gh-pages.js
 
 - `git` installed and configured
 - A remote `origin` for this repo
-- A `gh-pages` branch in the remote repository (the script creates or resets it)
 - `npm` and `node` available in your shell
+
+If `origin/gh-pages` does not exist yet, the deploy script will create a local `gh-pages` branch and push it to the remote.
 
 ## GitHub Pages settings
 
