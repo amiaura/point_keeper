@@ -21,8 +21,7 @@ const games = [
   },
   {
     title: 'Drinking',
-    description: 'Keep score for drinking game rounds and penalties.',
-    href: '/drinking',
+    description: 'Reference game instructions for drinking without score tracking.',
     instructionsHref: `${basePath}/instructions/drinking.pdf`,
     image: `${basePath}/images/drinking.jpg`,
     imageAlt: 'Drinking game illustration',
@@ -37,8 +36,7 @@ const games = [
   },
   {
     title: 'Garbage',
-    description: 'Track card progress, sorting, and round totals for garbage.',
-    href: '/garbage',
+    description: 'Reference game instructions for garbage without score tracking.',
     instructionsHref: `${basePath}/instructions/garbage.pdf`,
     image: `${basePath}/images/garbage.jpg`,
     imageAlt: 'Garbage card game illustration',
@@ -77,8 +75,7 @@ const games = [
   },
   {
     title: 'Mao',
-    description: 'Track rule changes and penalties for Mao card play.',
-    href: '/mao',
+    description: 'Reference game instructions for Mao without score tracking.',
     instructionsHref: `${basePath}/instructions/mao.pdf`,
     image: `${basePath}/images/mao.jpg`,
     imageAlt: 'Mao card game illustration',
@@ -101,8 +98,7 @@ const games = [
   },
   {
     title: 'Speed',
-    description: 'Track fast-paced card rounds and winner scoring.',
-    href: '/speed',
+    description: 'Reference game instructions for Speed without score tracking.',
     instructionsHref: `${basePath}/instructions/speed.pdf`,
     image: `${basePath}/images/speed.jpg`,
     imageAlt: 'Speed card game illustration',
@@ -116,6 +112,10 @@ const games = [
     imageAlt: 'Tonk card game illustration',
   },
 ];
+
+const nonPointGames = ['Drinking', 'Mao', 'Garbage', 'Speed'];
+const scoringGames = games.filter((game) => !nonPointGames.includes(game.title));
+const nonScoringGames = games.filter((game) => nonPointGames.includes(game.title));
 
 export default function HomePage() {
   return (
@@ -134,7 +134,25 @@ export default function HomePage() {
         <h2>Card games</h2>
         <p>Select a game to open its dedicated scoring page.</p>
         <div className="game-grid">
-          {games.map((game) => (
+          {scoringGames.map((game) => (
+            <GameCard
+              key={game.title}
+              title={game.title}
+              description={game.description}
+              href={game.href}
+              instructionsHref={game.instructionsHref}
+              image={game.image}
+              imageAlt={game.imageAlt}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <h2>Games without point keeping</h2>
+        <p>These games are included as reference and instruction guides rather than active score tracking.</p>
+        <div className="game-grid">
+          {nonScoringGames.map((game) => (
             <GameCard
               key={game.title}
               title={game.title}
