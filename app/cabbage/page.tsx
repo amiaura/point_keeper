@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useGameState } from '../../context/GameStateContext';
+import WinnerModal from '../../components/WinnerModal';
 
 interface Player {
   id: string;
@@ -413,9 +414,13 @@ export default function CabbagePage() {
         )}
 
         {winner && rounds.length >= 6 && (
-          <div className="banner">
-            <strong>Game over.</strong> Lowest total wins: {winner.name} with {winner.totalScore} points.
-          </div>
+          <WinnerModal
+            title="Game Over"
+            message={`Lowest total wins: ${winner.name} with ${winner.totalScore} points.`}
+            actionLabel="New Game"
+            onClose={() => setWinner(null)}
+            onAction={resetGame}
+          />
         )}
       </section>
     </main>
