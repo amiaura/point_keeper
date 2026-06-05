@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useGameState } from '../../context/GameStateContext';
+import WinnerModal from '../../components/WinnerModal';
 
 interface Player {
   id: string;
@@ -364,15 +365,13 @@ export default function RummyPage() {
       </section>
 
       {winner && (
-        <div className="modal-overlay" onClick={closeWinnerPopup}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>🎉 New Game</h2>
-            <p>{winner.name} has reached {winner.totalScore} points!</p>
-            <button onClick={resetGame} className="button-primary">
-              New Game
-            </button>
-          </div>
-        </div>
+        <WinnerModal
+          title="🎉 New Game"
+          message={`${winner.name} has reached ${winner.totalScore} points!`}
+          actionLabel="New Game"
+          onClose={closeWinnerPopup}
+          onAction={resetGame}
+        />
       )}
     </main>
   );
